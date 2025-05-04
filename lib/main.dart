@@ -1,6 +1,6 @@
 
 
-import 'package:bca_project/home_screen.dart';
+import 'package:bca_project/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -13,6 +13,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeScreen());
+    return const MaterialApp(home: RegisterScreen());
   }
 }
