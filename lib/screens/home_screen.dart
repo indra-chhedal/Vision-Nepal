@@ -21,19 +21,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void fetchArticlesFromApi() async {
-    var url = Uri.parse("http://localhost:1337/api/articles/?populate=*");
+    var url = Uri.parse("http://10.0.2.2:1337/api/articles?populate=*");
     http.Response result = await http.get(url);
     Map<String, dynamic> decodedResult = jsonDecode(result.body);
-
     List data = decodedResult['data'];
 
     for (int i = 0; i < data.length; i++) {
       articles.add(data[i]);
     }
-    setState(() {
-      
-    });
-    // debugPrint("the length of article s is  ${articles.length}"")
+
+    setState(() {});
+
+    debugPrint("The length of articles is ${articles.length}");
   }
 
   @override
@@ -44,8 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: false,
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu))],
       ),
-      body: ListView.separated(//seperated la chai 2ta list ko bich ma gap dinxa ani seperatorbuilder dinxa
-        itemCount: 10,
+      body: ListView.separated(
+        itemCount: articles.length,
         padding: EdgeInsets.symmetric(horizontal: 16),
         separatorBuilder: (_, __) => SizedBox(height: 40),
         itemBuilder: (_, int index) {

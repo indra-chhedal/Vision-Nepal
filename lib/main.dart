@@ -1,8 +1,8 @@
 
-
+import 'package:bca_project/screens/home_screen.dart';
 import 'package:bca_project/screens/register_screen.dart';
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MainApp());

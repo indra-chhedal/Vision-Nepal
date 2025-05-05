@@ -9,7 +9,7 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint(article.toString());
 
-    Map<String, dynamic> cover = article['cover'];
+    Map<String, dynamic> cover = article['Cover'];
 
     String coverUrl = cover['url'];
     return Column(
@@ -20,13 +20,13 @@ class NewsCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(18),
             child: Image.network(
-              "http://localhost:1300$coverUrl",
+              "http://10.0.2.2:1337$coverUrl",
               fit: BoxFit.cover,
             ),
           ),
         ),
         Text(
-          article['title'],
+          article['Title'],
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
         ),
         Row(spacing: 10, children: [Icon(Icons.alarm_add), Text("4hr Ago")]),

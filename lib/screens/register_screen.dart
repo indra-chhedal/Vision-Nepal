@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:bca_project/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -102,18 +108,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      bool isValid = _formKey.currentState!.validate();
-                      if (isValid) {
-                        String username = _usernameController.text;
-                        String email = _emailController.text;
-                        String password = _passwrodController.text;
-                      }
-                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                     ),
+                    onPressed: () async {
+                      bool isValid = _formKey.currentState!.validate();
+                      if (isValid) {//yasma chai yadi _formkey valid xa vanya form ma vako data haru talako string variable ma store hunxa
+                        String username = _usernameController.text;
+                        String email = _emailController.text;
+                        String password = _passwrodController.text;
+
+                        final registerUrl = Uri.parse(
+                          "http://10.0.2.2:1337/api/auth/local/register",
+                        );//android immulator ma chai localhost ko place ma 10.0.2.2 rakhna parxa ani balla hamro form ko data api ma janxa 
+                        http.Response responce = await http.post(
+                          registerUrl,
+                          body: {
+                            "username": username,
+                            "password": password,
+                            "email": email,
+                          },//yasma registerurl vanako positional parameter ani user name haru named parameter jun ko position la farak pardina
+                        );
+                        if (responce.statusCode == 200) {
+                          // debugPrint("success");
+                          showTopSnackBar(//snack bar add garna ko lagi top_sncak_flutter package import garyo ani yo  chai message display garauna ko lagi use hunxa in short time.
+                            Overlay.of(context),
+                            CustomSnackBar.success(
+                              message: "User Registered Successfully",
+                            ),
+                          );
+                          // Navigator.of(context).pop();
+
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) {
+                          //       return LoginScreen();
+                          //     },
+                          //   ),
+                          // );
+                          Navigator.of(context).pushReplacement(//push replacement la chai pahila ko screen lai stack bta replace garyara naya screen open garxa
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return HomeScreen();
+                              },
+                            ),
+                          );
+                        }
+                        if (responce.statusCode == 400) {
+                          final decodedData = jsonDecode(responce.body);//yasma chai data decode garako body bta jun postman ma rakhya xa body ko data if error aayo vani
+                          final message = decodedData["error"]["message"];//map format ma vako data lai access garako 
+
+                          showTopSnackBar(
+                            Overlay.of(context),
+                            CustomSnackBar.error(message: message),
+                          );
+                        }
+                      }
+                    },
+
                     child: Text("SignUp"),
                   ),
                 ),
