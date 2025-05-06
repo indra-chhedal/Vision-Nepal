@@ -1,11 +1,9 @@
-import 'package:flutter/foundation.dart';
-
 class Article {
   final int id;
   final String documentId;
   final String title;
   final String description;
-  final String publishedAt;
+  final DateTime publishedAt;
   final String coverImageUrl;
 
   Article({
@@ -16,4 +14,14 @@ class Article {
     required this.publishedAt,
     required this.coverImageUrl,
   });
+  factory Article.fromMap(Map<String, dynamic> map) {
+    return Article(
+      id: map['id'],
+      documentId: map['documentId'],
+      title: map['Title'],
+      description: map['description'],
+      publishedAt: DateTime.parse(map['publishedAt']),
+      coverImageUrl: map['Cover']['url'],//use Cover in strapi server uppercase
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bca_project/models/article.dart';
 import 'package:bca_project/widgets/news_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Map<String, dynamic>> articles = [];
+  List<Article> articles =
+      []; //list ko type article form ma xa so articles ma data haru list of article ko form ma store hunxa
 
   @override
   void initState() {
@@ -27,12 +29,12 @@ class _HomeScreenState extends State<HomeScreen> {
     List data = decodedResult['data'];
 
     for (int i = 0; i < data.length; i++) {
-      articles.add(data[i]);
+      articles.add(Article.fromMap(data[i]));
     }
 
     setState(() {});
 
-    debugPrint("The length of articles is ${articles.length}");
+    // debugPrint("The length of articles is ${articles.length}");
   }
 
   @override
@@ -45,8 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView.separated(
         itemCount: articles.length,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        separatorBuilder: (_, __) => SizedBox(height: 40),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        separatorBuilder:
+            (_, __) => SizedBox(
+              height: 40,
+            ), //we can use under score at the place of context and index value in seperator buildor if context is not needed
         itemBuilder: (_, int index) {
           return NewsCard(article: articles[index]);
         },
