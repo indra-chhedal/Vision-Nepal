@@ -13,8 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Article> articles =
-      []; //list ko type article form ma xa so articles ma data haru list of article ko form ma store hunxa
+  List<Article> articles = []; //list ko type article form ma xa so articles ma data haru list of article ko form ma store hunxa
 
   @override
   void initState() {

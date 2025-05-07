@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:bca_project/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -61,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           ispasswordObsecured = !ispasswordObsecured;
                         });
-                        debugPrint("success login");
+                        // debugPrint("success login");
                       },
                       icon: Icon(
                         ispasswordObsecured
@@ -85,8 +91,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      _formKey.currentState!.validate();
+                    onPressed: () async {
+                      bool isValid = _formKey.currentState!.validate();
+                      if (isValid) {
+                        final loginUri = Uri.parse(
+                          "http://10.0.2.2:1337/api/auth/local",
+                        );
+                        http.Response response = await http.post(
+                          loginUri,
+                          body: {
+                            "identifier": _usernameController.text,
+                            "password": _passwordController.text,
+                          },
+                        );
+                        if (response.statusCode == 200) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return HomeScreen();
+                              },
+                            ),
+                          );
+                          showTopSnackBar(
+                            Overlay.of(context),
+                            CustomSnackBar.success(message: "Login Successful"),
+                          );
+                        }
+                        if (response.statusCode == 400) {
+                          final decodedResult = jsonDecode(response.body);
+                          final message = decodedResult['error']['message'];
+                          showTopSnackBar(
+                            Overlay.of(context),
+                            CustomSnackBar.error(message: message),
+                          );
+                        }
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueAccent,
