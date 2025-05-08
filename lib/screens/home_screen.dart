@@ -1,9 +1,10 @@
-import 'dart:convert';
+import 'package:bca_project/screens/news_screen.dart';
+import 'package:bca_project/screens/profile_screen.dart';
+import 'package:bca_project/screens/videos_screen.dart';
+import 'package:bca_project/widgets/dark_mode.dart';
+import 'package:bca_project/widgets/drawer_icons.dart';
 
-import 'package:bca_project/models/article.dart';
-import 'package:bca_project/widgets/news_cart.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,47 +14,143 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Article> articles = []; //list ko type article form ma xa so articles ma data haru list of article ko form ma store hunxa
+  int currentIndex = 0;
+  final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 
-  @override
-  void initState() {
-    super.initState();
-    fetchArticlesFromApi();
-  }
-
-  void fetchArticlesFromApi() async {
-    var url = Uri.parse("http://10.0.2.2:1337/api/articles?populate=*");
-    http.Response result = await http.get(url);
-    Map<String, dynamic> decodedResult = jsonDecode(result.body);
-    List data = decodedResult['data'];
-
-    for (int i = 0; i < data.length; i++) {
-      articles.add(Article.fromMap(data[i]));
-    }
-
-    setState(() {});
-
-    // debugPrint("The length of articles is ${articles.length}");
-  }
+  final List<Widget> _screens = [
+    Center(child: Text("hello")),
+    VideosScreen(),
+    NewsScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Trending"),
-        centerTitle: false,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu))],
+      drawer: Drawer(
+        width: 350,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(10, 60, 10, 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.brown[100],
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage("images/account.jpeg"),
+                    ),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Vision Nepal",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "visionnepal05@gmail.com",
+                            style: TextStyle(fontSize: 14, color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(Icons.arrow_forward_ios, size: 20),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+              Card(
+                elevation: 2,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    DrawerIcons(
+                      icons: Icons.video_collection,
+                      title: "Watch Video",
+                    ),
+                    Divider(height: 1, thickness: 1, color: Colors.grey[300]),
+                    DrawerIcons(
+                      icons: Icons.newspaper_sharp,
+                      title: "News Article",
+                    ),
+                    Divider(height: 1, thickness: 1, color: Colors.grey[300]),
+                    DrawerIcons(icons: Icons.message, title: "Send Message"),
+                    Divider(height: 1, thickness: 1, color: Colors.grey[300]),
+                    DrawerIcons(
+                      icons: Icons.calendar_month,
+                      title: "Nepali Calendar",
+                    ),
+                    Divider(height: 1, thickness: 1, color: Colors.grey[300]),
+                    DrawerIcons(
+                      icons: Icons.calendar_today,
+                      title: "Date Translation",
+                    ),
+                    Divider(height: 1, thickness: 1, color: Colors.grey[300]),
+                    DrawerIcons(
+                      icons: Icons.sticky_note_2,
+                      title: "Write Note",
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+
+              Dark_Mode(themeNotifier: themeNotifier),
+            ],
+          ),
+        ),
       ),
-      body: ListView.separated(
-        itemCount: articles.length,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        separatorBuilder:
-            (_, __) => SizedBox(
-              height: 40,
-            ), //we can use under score at the place of context and index value in seperator buildor if context is not needed
-        itemBuilder: (_, int index) {
-          return NewsCard(article: articles[index]);
+      appBar: AppBar(
+        title: Text("Vision Nepal"),
+
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
+      ),
+      body: _screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.black,
+        elevation: 2,
+
+        currentIndex: currentIndex,
+        onTap: (index) {
+          if (index == 3) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return ProfileScreen();
+                },
+              ),
+            );
+          } else {
+            setState(() {
+              currentIndex = index;
+            });
+          }
         },
+
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.video_collection),
+            label: 'Video',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }

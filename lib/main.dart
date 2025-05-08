@@ -13,6 +13,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeScreen());
+    final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(
+      ThemeMode.light,
+    );
+
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifier,
+      builder: (context, mode, _) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Dark Mode Demo',
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: mode,
+          home: HomeScreen(),
+        );
+      },
+    );
   }
 }

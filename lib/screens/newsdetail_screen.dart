@@ -11,11 +11,16 @@ class NewsdetailScreen extends StatefulWidget {
 }
 
 class _NewsdetailScreenState extends State<NewsdetailScreen> {
+  bool isExpanded = false;
   List<Article> articles = [];
+
+
+   
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(title: Text(widget.article.title)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),
@@ -32,9 +37,12 @@ class _NewsdetailScreenState extends State<NewsdetailScreen> {
                 ),
               ),
             ),
-            Text(
-              widget.article.title,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.article.title,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
             ),
             Row(
               spacing: 10,
@@ -46,23 +54,40 @@ class _NewsdetailScreenState extends State<NewsdetailScreen> {
                 ),
               ],
             ),
-            Text(
-              maxLines: 7,
-              widget.article.description,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            AnimatedCrossFade(
+              firstChild: Text(
+                maxLines: 7,
+                overflow: TextOverflow.ellipsis,
+                widget.article.description,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+              secondChild: Text(
+                widget.article.description,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+              crossFadeState:
+                  isExpanded
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+              duration: Duration(microseconds: 1200),
             ),
+
             SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    isExpanded = !isExpanded;
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurpleAccent,
                   foregroundColor: Colors.white,
                 ),
                 child: Text(
-                  "Read More>>",
+                  isExpanded ? "Read Less >>" : "Read More >>",
                   style: TextStyle(
                     wordSpacing: 5,
                     fontSize: 20,

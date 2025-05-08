@@ -58,38 +58,45 @@ class _NewsCardState extends State<NewsCard> {
                 ),
               ),
             ),
-            Row(
-              spacing: 10,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                spacing: 10,
 
-              children: [
-                Icon(Icons.alarm),
-                Text(timeago.format(widget.article.publishedAt)),
-                SizedBox(width: 80),
-                IconButton(
-                  iconSize: 25,
-                  icon: Icon(isLiked ? Icons.favorite : Icons.favorite_border),
-                  color: isLiked ? Colors.red : Colors.black,
-                  onPressed: () {
-                    setState(() {
-                      isLiked = !isLiked;
-                    });
-                  },
-                ),
-
-                SizedBox(width: 20),
-                IconButton(
-                  iconSize: 25,
-                  icon: Icon(
-                    isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                children: [
+                  Icon(Icons.alarm),
+                  Text(timeago.format(widget.article.publishedAt)),
+                  SizedBox(width: 90),
+                  IconButton(
+                    padding: EdgeInsets.only(right: 15),
+                    iconSize: 25,
+                    icon: Icon(
+                      isLiked ? Icons.favorite : Icons.favorite_border,
+                    ),
+                    color: isLiked ? Colors.red : Colors.black,
+                    onPressed: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                    },
                   ),
-                  color: isBookmarked ? Colors.black : Colors.black,
-                  onPressed: () {
-                    setState(() {
-                      isBookmarked = !isBookmarked;
-                    });
-                  },
-                ),
-              ],
+
+                  SizedBox(width: 15),
+                  IconButton(
+                    padding: EdgeInsets.only(right: 5),
+                    iconSize: 25,
+                    icon: Icon(
+                      isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                    ),
+                    color: isBookmarked ? Colors.black : Colors.black,
+                    onPressed: () {
+                      setState(() {
+                        isBookmarked = !isBookmarked;
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

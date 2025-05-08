@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bca_project/screens/home_screen.dart';
+import 'package:bca_project/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -108,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) {
-                                return HomeScreen();
+                                return RegisterScreen();
                               },
                             ),
                           );
