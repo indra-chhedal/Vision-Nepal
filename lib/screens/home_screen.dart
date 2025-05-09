@@ -3,6 +3,7 @@ import 'package:bca_project/screens/profile_screen.dart';
 import 'package:bca_project/screens/videos_screen.dart';
 import 'package:bca_project/widgets/dark_mode.dart';
 import 'package:bca_project/widgets/drawer_icons.dart';
+import 'package:bca_project/widgets/social_icons.dart';
 
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 
   final List<Widget> _screens = [
     Center(child: Text("hello")),
@@ -78,35 +78,87 @@ class _HomeScreenState extends State<HomeScreen> {
                     DrawerIcons(
                       icons: Icons.video_collection,
                       title: "Watch Video",
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return VideosScreen();
+                            },
+                          ),
+                        );
+                      },
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.newspaper_sharp,
                       title: "News Article",
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return NewsScreen();
+                            },
+                          ),
+                        );
+                      },
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
-                    DrawerIcons(icons: Icons.message, title: "Send Message"),
+                    DrawerIcons(
+                      icons: Icons.message,
+                      title: "Send Message",
+                      onTap: () {},
+                    ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.calendar_month,
                       title: "Nepali Calendar",
+                      onTap: () {},
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.calendar_today,
                       title: "Date Translation",
+                      onTap: () {},
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.sticky_note_2,
                       title: "Write Note",
+                      onTap: () {},
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 15),
 
-              Dark_Mode(themeNotifier: themeNotifier),
+              DarkMode(),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 5,
+                children: [
+                  SocialIcons(
+                    icons: Icons.facebook,
+                    color: const Color.fromARGB(255, 48, 152, 237),
+                    onTap: () {},
+                  ),
+                  SocialIcons(
+                    icons: Icons.video_collection_outlined,
+                    color: Colors.red,
+                    onTap: () {},
+                  ),
+                  SocialIcons(
+                    icons: Icons.tiktok,
+                    color: Colors.black,
+                    onTap: () {},
+                  ),
+                  SocialIcons(
+                    icons: Icons.web_stories,
+                    color: Colors.pinkAccent,
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ],
           ),
         ),

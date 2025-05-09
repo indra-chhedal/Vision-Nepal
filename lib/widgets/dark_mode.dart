@@ -1,8 +1,8 @@
+import 'package:bca_project/main.dart';
 import 'package:flutter/material.dart';
 
-class Dark_Mode extends StatelessWidget {
-  final ValueNotifier<ThemeMode> themeNotifier;
-  const Dark_Mode({super.key, required this.themeNotifier});
+class DarkMode extends StatelessWidget {
+  const DarkMode({super.key});
 
   @override
   Widget build(BuildContext context) {

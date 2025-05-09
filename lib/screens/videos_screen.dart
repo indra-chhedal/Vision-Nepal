@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:bca_project/models/article.dart';
+import 'package:bca_project/models/videos.dart';
+import 'package:bca_project/widgets/video_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class VideosScreen extends StatefulWidget {
   const VideosScreen({super.key});
@@ -8,6 +14,27 @@ class VideosScreen extends StatefulWidget {
 }
 
 class _VideosScreenState extends State<VideosScreen> {
+  List<Videos> videos = [];
+
+  @override
+  void initState() {
+    fetchVideoFromApi();
+    super.initState();
+  }
+
+  void fetchVideoFromApi() async {
+    var url = Uri.parse("http://10.0.2.2:1337/api/videos/?populate=*");
+    http.Response response = await http.get(url);
+    Map<String,dynamic> decodedResult = jsonDecode(response.body);
+    List data = decodedResult['data'];
+
+    for (int i = 0; i < data.length; i++) {
+      videos.add(Videos.fromMap(data[i]));
+    }
+    setState(() {});
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +44,13 @@ class _VideosScreenState extends State<VideosScreen> {
         backgroundColor: const Color.fromARGB(255, 247, 246, 247),
         foregroundColor: const Color.fromARGB(255, 248, 4, 4),
       ),
-      body: Column(),
+      body: ListView.separated(
+        itemBuilder: (_, int index) {
+          return VideoCart(video: videos[index],);
+        },
+        separatorBuilder: (__, int index) => SizedBox(height: 40),
+        itemCount: videos.length,
+      ),
     );
   }
 }

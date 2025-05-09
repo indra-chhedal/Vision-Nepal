@@ -4,6 +4,7 @@ import 'package:bca_project/screens/register_screen.dart';
 
 import 'package:flutter/material.dart';
 
+final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 void main() {
   runApp(const MainApp());
 }
@@ -13,16 +14,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(
-      ThemeMode.light,
-    );
-
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (context, mode, _) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Dark Mode Demo',
+          
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
           themeMode: mode,

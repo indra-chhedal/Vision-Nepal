@@ -23,7 +23,7 @@ class _NewsCardState extends State<NewsCard> {
     // String cover = article['Cover']['url'];
     //cover variable ma article ko
     //yaslai map of string dynamic ma rakhyara ani tala $cover ko place ma $coverurl rakhna parxa
-    //Map<string, dynamic> cover = article['cover];
+    //Map<string, dynamic> cover = article['cover'];
     // String coverUrl = cover['url'];
     return Card(
       elevation: 1.0,
