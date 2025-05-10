@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bca_project/screens/home_screen.dart';
+
 import 'package:bca_project/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

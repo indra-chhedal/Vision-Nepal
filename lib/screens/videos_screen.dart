@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bca_project/models/article.dart';
+
 import 'package:bca_project/models/videos.dart';
 import 'package:bca_project/widgets/video_cart.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,4 @@
 import 'package:bca_project/screens/home_screen.dart';
-import 'package:bca_project/screens/login_screen.dart';
-import 'package:bca_project/screens/register_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,7 +12,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<ThemeMode>(
+    return ValueListenableBuilder<ThemeMode>( 
       valueListenable: themeNotifier,
       builder: (context, mode, _) {
         return MaterialApp(
