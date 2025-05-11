@@ -106,7 +106,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     DrawerIcons(
                       icons: Icons.message,
                       title: "Send Message",
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ProfileScreen();
+                            },
+                          ),
+                        );
+                      },
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(

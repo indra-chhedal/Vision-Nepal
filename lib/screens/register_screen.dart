@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:bca_project/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -82,7 +81,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 20),
                 TextFormField(
                   obscureText: ispasswordObsecured,
-                  controller: _passwrodController,//give the detail of textfield 
+                  controller:
+                      _passwrodController, //give the detail of textfield
                   decoration: InputDecoration(
                     labelText: "Password",
                     suffix: IconButton(
@@ -104,6 +104,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (value == null || value.isEmpty) {
                       return "Password is required";
                     }
+                    if (value.length < 8) {
+                      return "Password must be grater then 8 characters.";
+                    }
                     return null;
                   },
                 ),
@@ -118,7 +121,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () async {
-                      bool isValid = _formKey.currentState!.validate();//null hudina vanara !sign rakhyako/currentstate null hunna
+                      bool isValid =
+                          _formKey.currentState!
+                              .validate(); //null hudina vanara !sign rakhyako/currentstate null hunna
                       if (isValid) {
                         //yasma chai yadi _formkey valid xa vanya form ma vako data haru talako string variable ma store hunxa
                         String username = _usernameController.text;
@@ -179,6 +184,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     child: Text("SignUp"),
                   ),
+                ),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Do you have account ?",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return LoginScreen();
+                            },
+                          ),
+                          (value) {
+                            return false;
+                          },
+                        );
+                      },
+                      child: Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

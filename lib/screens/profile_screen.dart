@@ -1,4 +1,7 @@
+import 'package:bca_project/screens/accountsetting_screen.dart';
+import 'package:bca_project/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,7 +15,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shadowColor: Colors.white10,
+        elevation: 5,
+
         flexibleSpace: Padding(
           padding: EdgeInsets.fromLTRB(16, 40, 16, 10),
           child: Row(
@@ -35,12 +39,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(width: 15),
               IconButton(
                 icon: Icon(Icons.settings, color: Colors.brown[800], size: 30),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AccountsettingScreen();
+                      },
+                    ),
+                  );
+                },
               ),
               SizedBox(width: 15),
               IconButton(
                 icon: Icon(Icons.logout, color: Colors.red, size: 30),
-                onPressed: () {},
+                onPressed: () async {
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.remove("token");
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginScreen();
+                      },
+                    ),
+                    (value) {
+                      return false;
+                    },
+                  );
+                },
               ),
             ],
           ),
@@ -51,7 +77,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Expanded(child: Container()),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            height: 120,
+            padding: EdgeInsets.fromLTRB(5, 5, 5, 30),
             decoration: BoxDecoration(
               border: Border(top: BorderSide(color: Colors.grey.shade300)),
               color: Colors.white,
@@ -60,6 +87,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Expanded(
                   child: TextField(
+                    minLines: 3,
+                    maxLines: 4,
                     decoration: InputDecoration(
                       hintText: "Your Message Here",
                       border: OutlineInputBorder(
@@ -70,12 +99,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 5),
                 Container(
-                  height: 48,
-                  width: 48,
+                  height: 70,
+                  width: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
+                    color: Colors.deepPurple,
                   ),
                   child: Icon(Icons.send, color: Colors.white),
                 ),

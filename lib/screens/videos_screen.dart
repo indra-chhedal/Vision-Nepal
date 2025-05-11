@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:bca_project/models/videos.dart';
 import 'package:bca_project/widgets/video_cart.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +24,14 @@ class _VideosScreenState extends State<VideosScreen> {
   void fetchVideoFromApi() async {
     var url = Uri.parse("http://10.0.2.2:1337/api/videos/?populate=*");
     http.Response response = await http.get(url);
-    Map<String,dynamic> decodedResult = jsonDecode(response.body);
+    Map<String, dynamic> decodedResult = jsonDecode(response.body);
     List data = decodedResult['data'];
+    //both lines are written in single line using jsonDecode(response.body)['data'];
 
     for (int i = 0; i < data.length; i++) {
       videos.add(Videos.fromMap(data[i]));
     }
     setState(() {});
-    
   }
 
   @override
@@ -46,7 +45,7 @@ class _VideosScreenState extends State<VideosScreen> {
       ),
       body: ListView.separated(
         itemBuilder: (_, int index) {
-          return VideoCart(video: videos[index],);
+          return VideoCart(video: videos[index]);
         },
         separatorBuilder: (__, int index) => SizedBox(height: 40),
         itemCount: videos.length,

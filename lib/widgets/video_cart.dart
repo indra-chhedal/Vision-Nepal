@@ -1,14 +1,13 @@
-
 import 'package:bca_project/models/videos.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VideoCart extends StatefulWidget {
   final Videos video;
-  const VideoCart({
-    super.key,
-    required this.video
-  });
+  const VideoCart({super.key, required this.video});
 
   @override
   State<VideoCart> createState() => _VideoCartState();
@@ -32,7 +31,18 @@ class _VideoCartState extends State<VideoCart> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () async {
+                //url luncher use garna
+                var url = Uri.parse(widget.video.youtubeUrl);
+                if (await canLaunchUrl(url)) {
+                  launchUrl(url, mode: LaunchMode.externalApplication);
+                } else {
+                  showTopSnackBar(
+                    Overlay.of(context),
+                    CustomSnackBar.error(message: "Url is Not Present"),
+                  );
+                }
+              },
               child: Text(
                 widget.video.title,
                 style: TextStyle(
@@ -48,8 +58,8 @@ class _VideoCartState extends State<VideoCart> {
                 spacing: 15,
                 children: [
                   Icon(Icons.alarm),
-                  Text(timeago.format(widget.video.publishedAt)
-                    ,
+                  Text(
+                    timeago.format(widget.video.publishedAt),
                     style: TextStyle(fontSize: 15, color: Colors.grey),
                   ),
                 ],

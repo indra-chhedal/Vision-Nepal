@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-
+import 'package:bca_project/screens/home_screen.dart';
 import 'package:bca_project/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return "Password is required";
                     }
                     if (value.length <= 8) {
-                      return "password must be grater then 7 characters.";
+                      return "password must be grater then 8 characters.";
                     }
                     return null;
                   },
@@ -106,10 +107,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         );
                         if (response.statusCode == 200) {
+                          Map<String, dynamic> responseData = jsonDecode(
+                            response.body,
+                          );
+                          String token = responseData['jwt'];
+                          final SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.setString("token", token);
+
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) {
-                                return RegisterScreen();
+                                return HomeScreen();
                               },
                             ),
                           );
@@ -134,6 +143,42 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: Text("Login"),
                   ),
+                ),
+                SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Does't have account ?",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return RegisterScreen();
+                            },
+                          ),
+                          (value) {
+                            return false;
+                          },
+                        );
+                      },
+                      child: Text(
+                        "SighUp",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

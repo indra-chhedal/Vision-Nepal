@@ -4,6 +4,7 @@ class Videos {
   final String title;
   final DateTime publishedAt;
   final String coverUrl;
+  final String youtubeUrl;
 
   Videos({
     required this.id,
@@ -11,6 +12,7 @@ class Videos {
     required this.title,
     required this.publishedAt,
     required this.coverUrl,
+    required this.youtubeUrl,
   });
   factory Videos.fromMap(Map<String, dynamic> map) {
     return Videos(
@@ -19,6 +21,7 @@ class Videos {
       title: map['title'],
       publishedAt: DateTime.parse(map['publishedAt']),
       coverUrl: map['video']['url'],
+      youtubeUrl: map['video_url'],
     );
   }
 }
