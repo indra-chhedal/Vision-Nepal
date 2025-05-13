@@ -26,3 +26,7 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+
+//localization and internationalization -> used to photo scan and convert into voiceover
+//api.flutter.dev
+//google_mlkit_text_recoginition  //change the language 

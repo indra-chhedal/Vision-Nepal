@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bca_project/models/videos.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -33,9 +35,13 @@ class _VideoCartState extends State<VideoCart> {
             InkWell(
               onTap: () async {
                 //url luncher use garna
-                var url = Uri.parse(widget.video.youtubeUrl);
+                final url = Uri.parse(widget.video.youtubeUrl);
+                // debugPrint("url is $url");
+
+                final result = await canLaunchUrl(url);
+                log("result is $result");
                 if (await canLaunchUrl(url)) {
-                  launchUrl(url, mode: LaunchMode.externalApplication);
+                  await launchUrl(url);
                 } else {
                   showTopSnackBar(
                     Overlay.of(context),
