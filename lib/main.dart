@@ -1,4 +1,3 @@
-
 import 'package:bca_project/screens/splash_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -30,3 +29,5 @@ class MainApp extends StatelessWidget {
 //localization and internationalization -> used to photo scan and convert into voiceover
 //api.flutter.dev
 //google_mlkit_text_recoginition  //change the language 
+//mailar used to send mail
+//changenotifier/valuelistenablebuilder

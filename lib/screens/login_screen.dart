@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bca_project/core/api_constant.dart';
 import 'package:bca_project/screens/home_screen.dart';
 import 'package:bca_project/screens/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       bool isValid = _formKey.currentState!.validate();
                       if (isValid) {
                         final loginUri = Uri.parse(
-                          "http://10.0.2.2:1337/api/auth/local",
+                          "http://10.0.2.2:1337/api/auth/local",//${ApiConstant.apiBaseUrl}api/auth/local this is use for port forwarding
                         );
                         http.Response response = await http.post(
                           loginUri,

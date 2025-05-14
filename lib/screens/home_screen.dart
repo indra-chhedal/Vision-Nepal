@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:bca_project/models/login.dart';
 import 'package:bca_project/screens/news_screen.dart';
 import 'package:bca_project/screens/profile_screen.dart';
 import 'package:bca_project/screens/videos_screen.dart';
@@ -6,6 +9,9 @@ import 'package:bca_project/widgets/drawer_icons.dart';
 import 'package:bca_project/widgets/social_icons.dart';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,12 +22,38 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
+  
 
   final List<Widget> _screens = [
     Center(child: Text("hello")),
     VideosScreen(),
     NewsScreen(),
   ];
+
+  @override
+  void initState() {
+    userWelcome();
+    super.initState();
+  }
+
+  void userWelcome() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+    if (token == null) {
+      return;
+    }
+
+    var url = Uri.parse("http://10.0.2.2:1337/api/users/me");
+    http.Response response = await http.get(
+      url,
+      headers: {'Authorization': "Bearer $token"},
+    );
+    Map<String, dynamic> decodedResult = jsonDecode(response.body);
+    var data = decodedResult['username'];
+    
+
+    debugPrint("data is  $data");
+  }
 
   @override
   Widget build(BuildContext context) {

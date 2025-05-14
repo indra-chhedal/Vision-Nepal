@@ -15,6 +15,7 @@ class _NewsCardState extends State<NewsCard> {
   //yasma article ko type map<string, dynamic> xa jun chai hamla postman bta thaa pako
   bool isLiked = false;
   bool isBookmarked = false;
+  
 
   @override
   Widget build(BuildContext context) {

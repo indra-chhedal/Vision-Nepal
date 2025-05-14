@@ -1,4 +1,12 @@
+import 'dart:convert';
+
+import 'package:bca_project/screens/home_screen.dart';
+import 'package:bca_project/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class PasswordchangeScreen extends StatefulWidget {
   const PasswordchangeScreen({super.key});
@@ -122,19 +130,56 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                         ),
                       ),
                     ),
-                    validator: (value) {
-                      if (value != _newPasswordController) {
-                        return "New Password is Not Match";
-                      }
-                    },
+                    // validator: (value) {
+                    //   if (value != _newPasswordController) {
+                    //     return "New Password is Not Match";
+                    //   }
+                    // },
                   ),
                   SizedBox(height: 30),
                   SizedBox(
                     height: 50,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        _formKey.currentState!.validate();
+                      onPressed: () async {
+                        bool isValid = _formKey.currentState!.validate();
+                        if (isValid) {
+                          final changeurl = Uri.parse(
+                            "http://10.0.2.2:1337/api/auth/change-password",
+                          );
+                          http.Response response = await http.post(
+                            changeurl,
+                            body: {
+                              "currentPassword": _oldPasswordController.text,
+                              "password": _newPasswordController.text,
+                              "passwordConfirmation":
+                                  _conformPasswordController.text,
+                            },
+                          );
+                          if (response.statusCode == 200) {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return LoginScreen();
+                                },
+                              ),
+                            );
+                            showTopSnackBar(
+                              Overlay.of(context),
+                              CustomSnackBar.success(
+                                message: "Change Password Successfully",
+                              ),
+                            );
+                          }
+                          if (response.statusCode == 400) {
+                            final decodedResult = jsonDecode(response.body);
+                            final message = decodedResult['error']['message'];
+                            showTopSnackBar(
+                              Overlay.of(context),
+                              CustomSnackBar.error(message: message),
+                            );
+                          }
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurple,

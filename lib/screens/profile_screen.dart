@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:bca_project/models/login.dart';
 import 'package:bca_project/screens/accountsetting_screen.dart';
 import 'package:bca_project/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -9,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+ 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -29,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       path: 'chhedalindra@gmail.com',
       queryParameters: {'subject': 'message from flutter app', 'body': message},
     );
-    debugPrint("url is $emailUrl");
+    // debugPrint("url is $emailUrl");
     if (await canLaunchUrl(emailUrl)) {
       await launchUrl(emailUrl);
     } else {
@@ -57,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(width: 20),
               Text(
-                "Indra Chhedal",
+                "indra chhhedal",
                 style: TextStyle(color: Colors.brown[800], fontSize: 16),
               ),
               Spacer(),
