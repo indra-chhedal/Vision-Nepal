@@ -11,9 +11,10 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, required this.user});
 
- 
+  final Login user;
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -62,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(width: 20),
               Text(
-                "indra chhhedal",
+                widget.user.username,
                 style: TextStyle(color: Colors.brown[800], fontSize: 16),
               ),
               Spacer(),

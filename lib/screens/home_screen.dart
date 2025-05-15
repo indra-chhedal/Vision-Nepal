@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  
+  Login? user;
 
   final List<Widget> _screens = [
     Center(child: Text("hello")),
@@ -49,10 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
       headers: {'Authorization': "Bearer $token"},
     );
     Map<String, dynamic> decodedResult = jsonDecode(response.body);
-    var data = decodedResult['username'];
+    Login data = Login.fromMap(decodedResult);
     
-
-    debugPrint("data is  $data");
+    setState(() {
+      user = data;
+    });
   }
 
   @override
@@ -142,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return ProfileScreen();
+                              return ProfileScreen(user: user!);
                             },
                           ),
                         );
@@ -216,11 +217,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
         currentIndex: currentIndex,
         onTap: (index) {
-          if (index == 3) {
+          if (index == 3 && user != null) {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return ProfileScreen();
+                  return ProfileScreen(user: user!);
                 },
               ),
             );

@@ -98,8 +98,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       bool isValid = _formKey.currentState!.validate();
                       if (isValid) {
                         final loginUri = Uri.parse(
-                          "http://10.0.2.2:1337/api/auth/local",//${ApiConstant.apiBaseUrl}api/auth/local this is use for port forwarding
+                          "http://10.0.2.2:1337/api/auth/local", //${ApiConstant.apiBaseUrl}api/auth/local this is use for port forwarding
                         );
+                        
                         http.Response response = await http.post(
                           loginUri,
                           body: {
