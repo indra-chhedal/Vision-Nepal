@@ -1,0 +1,48 @@
+{
+  
+  "login": "Login",
+  "@login": {
+    "description": "login is successful"
+  },
+  "visionNepal": "Visioan Nepal",
+  
+  "watchVideo": "Watch Video",
+
+  "newsArticle": "News Article",
+
+  "sendMessage": "Send Message",
+
+  "nepaliCalendar": "Nepali Calendar",
+
+  "dateTranslation": "Date Translation",
+
+  "writeNote": "Write Nonte",
+
+  "darkMode": "Dark Mode",
+
+  "messageHere": " Write Your Message Here",
+
+  "changePassword": "Change Password",
+
+  "accountSetting": "Account Setting",
+
+  "changePasswordtext": "Change login password of Your account",
+
+  "oldPassword": "Old Password",
+
+  "newPassword": "New Password",
+
+  "conformPassword": "Conform Password",
+
+  "username": "UserName",
+
+  "passwrod": "Password",
+
+  "noAccount": "Doesn't Have Account ?",
+
+  "signup": "SignUp",
+
+  "email": "Email",
+
+  "haveaccount": "Do you have account ?"
+}

@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordchangeScreen extends StatefulWidget {
   const PasswordchangeScreen({super.key});
@@ -39,7 +40,7 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Change Password"),
+        title: Text(AppLocalizations.of(context)!.changePassword),
         elevation: 1,
       ),
       body: SingleChildScrollView(
@@ -56,7 +57,7 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Change Password",
+                    AppLocalizations.of(context)!.changePassword,
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   ),
                   SizedBox(height: 30),
@@ -65,7 +66,7 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                     controller: _oldPasswordController,
                     obscureText: isObsecured,
                     decoration: InputDecoration(
-                      labelText: "Old Password",
+                      labelText: AppLocalizations.of(context)!.oldPassword,
                       border: OutlineInputBorder(),
                       suffix: IconButton(
                         onPressed: () {
@@ -86,7 +87,7 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                     controller: _newPasswordController,
                     obscureText: isObsecured2,
                     decoration: InputDecoration(
-                      labelText: "New Password",
+                      labelText: AppLocalizations.of(context)!.newPassword,
                       border: OutlineInputBorder(),
                       suffix: IconButton(
                         onPressed: () {
@@ -115,7 +116,7 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                     controller: _conformPasswordController,
                     obscureText: isObsecured3,
                     decoration: InputDecoration(
-                      labelText: "Conform Password",
+                      labelText: AppLocalizations.of(context)!.conformPassword,
                       border: OutlineInputBorder(),
                       suffix: IconButton(
                         onPressed: () {
@@ -187,7 +188,7 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                         foregroundColor: Colors.white,
                       ),
                       child: Text(
-                        "Change Password",
+                        AppLocalizations.of(context)!.changePassword,
                         style: TextStyle(fontSize: 16),
                       ),
                     ),

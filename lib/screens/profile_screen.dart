@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.user});
@@ -126,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     minLines: 3,
                     maxLines: 4,
                     decoration: InputDecoration(
-                      hintText: "Your Message Here",
+                      hintText: AppLocalizations.of(context)!.messageHere,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6),
                         borderSide: BorderSide(color: Colors.purple),

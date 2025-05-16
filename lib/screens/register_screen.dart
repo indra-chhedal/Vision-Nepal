@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -44,14 +45,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 SizedBox(height: 100),
                 Text(
-                  "SignUP",
+                  AppLocalizations.of(context)!.signup,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 50),
 
                 TextFormField(
                   controller: _usernameController,
-                  decoration: InputDecoration(labelText: "UserName"),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.username,
+                  ),
                   validator: (String? value) {
                     if (value == null) {
                       return "Username is required";
@@ -65,7 +68,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 20),
                 TextFormField(
                   controller: _emailController,
-                  decoration: InputDecoration(labelText: "Email"),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.email,
+                  ),
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return "Email is required";
@@ -85,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller:
                       _passwrodController, //give the detail of textfield
                   decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: AppLocalizations.of(context)!.passwrod,
                     suffix: IconButton(
                       onPressed: () {
                         setState(() {
@@ -183,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         }
                       }
                     },
-                    child: Text("SignUp"),
+                    child: Text(AppLocalizations.of(context)!.signup),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -191,7 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Do you have account ?",
+                      AppLocalizations.of(context)!.haveaccount,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -212,7 +217,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         );
                       },
                       child: Text(
-                        "Login",
+                        AppLocalizations.of(context)!.login,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

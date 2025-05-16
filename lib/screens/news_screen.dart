@@ -6,6 +6,7 @@ import 'package:bca_project/widgets/news_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({super.key});
@@ -54,7 +55,7 @@ class _NewsScreenState extends State<NewsScreen> {
       backgroundColor: const Color.fromARGB(26, 248, 244, 244),
       appBar: AppBar(
         title: Text(
-          "News Article",
+          AppLocalizations.of(context)!.newsArticle,
           style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

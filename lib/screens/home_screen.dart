@@ -6,8 +6,9 @@ import 'package:bca_project/screens/profile_screen.dart';
 import 'package:bca_project/screens/videos_screen.dart';
 import 'package:bca_project/widgets/dark_mode.dart';
 import 'package:bca_project/widgets/drawer_icons.dart';
+import 'package:bca_project/widgets/language_trancelet.dart';
 import 'package:bca_project/widgets/social_icons.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     Map<String, dynamic> decodedResult = jsonDecode(response.body);
     Login data = Login.fromMap(decodedResult);
-    
+
     setState(() {
       user = data;
     });
@@ -62,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         width: 350,
         child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(10, 60, 10, 10),
+          padding: EdgeInsets.fromLTRB(10, 60, 10, 60),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Vision Nepal",
+                            AppLocalizations.of(context)!.visionNepal,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -110,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     DrawerIcons(
                       icons: Icons.video_collection,
-                      title: "Watch Video",
+                      title: AppLocalizations.of(context)!.watchVideo,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -124,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.newspaper_sharp,
-                      title: "News Article",
+                      title: AppLocalizations.of(context)!.newsArticle,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -138,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.message,
-                      title: "Send Message",
+                      title: AppLocalizations.of(context)!.sendMessage,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -152,28 +153,50 @@ class _HomeScreenState extends State<HomeScreen> {
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.calendar_month,
-                      title: "Nepali Calendar",
+                      title: AppLocalizations.of(context)!.nepaliCalendar,
                       onTap: () {},
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.calendar_today,
-                      title: "Date Translation",
+                      title: AppLocalizations.of(context)!.dateTranslation,
                       onTap: () {},
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
                       icons: Icons.sticky_note_2,
-                      title: "Write Note",
+                      title: AppLocalizations.of(context)!.writeNote,
                       onTap: () {},
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
 
               DarkMode(),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
+              Card(
+                elevation: 3,
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.white10),
+                  child: Column(
+                    children: [
+                      LanguageTrancelet(
+                        title: "English Language",
+                        subtitle: "Set app language to English",
+                        ontap: () {},
+                      ),
+                      Divider(thickness: 1.3, height: 1),
+                      LanguageTrancelet(
+                        title: "नेपाली भाषा",
+                        subtitle: "एप भाषा नेपालीमा सेट गर्नुहोस्",
+                        ontap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 5,
@@ -205,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       appBar: AppBar(
-        title: Text("Vision Nepal"),
+        title: Text(AppLocalizations.of(context)!.visionNepal),
 
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
       ),

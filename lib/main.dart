@@ -1,6 +1,6 @@
 import 'package:bca_project/screens/splash_screen.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 void main() {
@@ -20,6 +20,9 @@ class MainApp extends StatelessWidget {
           darkTheme: ThemeData.dark(),
           themeMode: mode,
           home: SplashScreen(),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: Locale('ne'),
         );
       },
     );
@@ -30,4 +33,4 @@ class MainApp extends StatelessWidget {
 //api.flutter.dev
 //google_mlkit_text_recoginition  //change the language 
 //mailar used to send mail
-//changenotifier/valuelistenablebuilder
+//changenotifier/valuelistenablebuilder 

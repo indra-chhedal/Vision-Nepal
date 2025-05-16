@@ -1,5 +1,6 @@
 import 'package:bca_project/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DarkMode extends StatelessWidget {
   const DarkMode({super.key});
@@ -13,7 +14,7 @@ class DarkMode extends StatelessWidget {
       child: InkWell(
         child: ListTile(
           leading: Text(
-            "Dark Mode",
+            AppLocalizations.of(context)!.darkMode,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           trailing: Switch(

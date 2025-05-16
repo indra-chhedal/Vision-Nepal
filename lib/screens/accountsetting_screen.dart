@@ -1,5 +1,6 @@
 import 'package:bca_project/screens/passwordchange_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AccountsettingScreen extends StatefulWidget {
   const AccountsettingScreen({super.key});
@@ -12,7 +13,7 @@ class _ChangepasswordScreenState extends State<AccountsettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Account Settings"), elevation: 1),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.accountSetting), elevation: 1),
       body: Card(
         color: Colors.white,
         elevation: 3,
@@ -33,11 +34,11 @@ class _ChangepasswordScreenState extends State<AccountsettingScreen> {
             child: ListTile(
               leading: Icon(Icons.lock),
               title: Text(
-                "Change Password",
+                AppLocalizations.of(context)!.changePassword,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                "Change login passwrd of your account.",
+                AppLocalizations.of(context)!.changePasswordtext,
                 style: TextStyle(fontSize: 13),
               ),
               trailing: Icon(Icons.arrow_forward_ios),

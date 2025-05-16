@@ -1,0 +1,45 @@
+{
+    "login": "लगइन",
+
+    "visionNepal": "भिजन नेपाल",
+
+    "watchVideo": "भिडियो हेर्नुहोस्",
+
+  "newsArticle": "समाचार लेख",
+
+  "sendMessage": "सन्देश पठाउनुहोस् ",
+
+  "nepaliCalendar": "नेपाली पात्रो",
+
+  "dateTranslation": "मिति अनुवाद",
+
+  "writeNote": "नोट लेख्नुहोस्",
+
+  "darkMode": "गाढा मोड",
+
+  "messageHere": "यहाँ आफ्नो सन्देश लेख्नुहोस्",
+
+  "changePassword": "पासवर्ड परिवर्तन गर्नुहोस्",
+
+  "accountSetting": "खाता सेटिङ",
+
+  "changePasswordtext": "आफ्नो खाताको लगइन पासवर्ड परिवर्तन गर्नुहोस्",
+
+  "oldPassword": "पुरानो पासवर्ड",
+
+  "newPassword": "नयाँ पासवर्ड",
+
+  "conformPassword": "पासवर्ड अनुरूप",
+
+  "username": "प्रयोगकर्ता नाम",
+
+  "passwrod": "पासवर्ड",
+
+  "noAccount": "के तपाईंको खाता छैन?",
+
+  "signup": "साइनअप गर्नुहोस्",
+
+  "email": "इमेल",
+
+  "haveaccount": "के तपाईंसँग खाता छ?"
+}

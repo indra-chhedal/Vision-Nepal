@@ -8,7 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -42,13 +43,13 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 SizedBox(height: 80),
                 Text(
-                  "Login",
+                  AppLocalizations.of(context)!.login,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 220),
                 TextFormField(
                   controller: _usernameController,
-                  decoration: InputDecoration(labelText: "UserName"),
+                  decoration: InputDecoration(labelText: AppLocalizations.of(context)!.username),
                   validator: (String? value) {
                     if (value == null) {
                       return "Username is required";
@@ -64,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: ispasswordObsecured,
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: AppLocalizations.of(context)!.passwrod,
                     suffix: IconButton(
                       onPressed: () {
                         setState(() {
@@ -100,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         final loginUri = Uri.parse(
                           "http://10.0.2.2:1337/api/auth/local", //${ApiConstant.apiBaseUrl}api/auth/local this is use for port forwarding
                         );
-                        
+
                         http.Response response = await http.post(
                           loginUri,
                           body: {
@@ -143,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       backgroundColor: Colors.blueAccent,
                       foregroundColor: Colors.white,
                     ),
-                    child: Text("Login"),
+                    child: Text(AppLocalizations.of(context)!.login),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -151,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Does't have account ?",
+                      AppLocalizations.of(context)!.noAccount,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -172,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       },
                       child: Text(
-                        "SighUp",
+                        AppLocalizations.of(context)!.signup,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

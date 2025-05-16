@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:bca_project/core/api_constant.dart';
 import 'package:bca_project/models/videos.dart';
 import 'package:bca_project/widgets/video_cart.dart';
@@ -39,7 +39,7 @@ class _VideosScreenState extends State<VideosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Watch Videos"),
+        title: Text(AppLocalizations.of(context)!.watchVideo),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 247, 246, 247),
         foregroundColor: const Color.fromARGB(255, 248, 4, 4),
