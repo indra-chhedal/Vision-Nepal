@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bca_project/models/login.dart';
+import 'package:bca_project/screens/calander_screen.dart';
 import 'package:bca_project/screens/news_screen.dart';
 import 'package:bca_project/screens/profile_screen.dart';
 import 'package:bca_project/screens/videos_screen.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Login? user;
 
   final List<Widget> _screens = [
-    Center(child: Text("hello")),
+    CalanderScreen(),
     VideosScreen(),
     NewsScreen(),
   ];
