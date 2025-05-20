@@ -144,41 +144,61 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                     child: ElevatedButton(
                       onPressed: () async {
                         bool isValid = _formKey.currentState!.validate();
+                        // debugPrint("Is Value $isValid");
                         if (isValid) {
+                          SharedPreferences ins =
+                              await SharedPreferences.getInstance();
+                          final String? token = ins.getString("token");
+
+                          if (token == null) return;
+
                           final changeurl = Uri.parse(
                             "http://10.0.2.2:1337/api/auth/change-password",
                           );
-                          http.Response response = await http.post(
-                            changeurl,
-                            body: {
-                              "currentPassword": _oldPasswordController.text,
-                              "password": _newPasswordController.text,
-                              "passwordConfirmation":
-                                  _conformPasswordController.text,
-                            },
-                          );
-                          debugPrint("data is $response");
-                          if (response.statusCode == 200) {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return LoginScreen();
+                          try {
+                            http.Response response = await http.post(
+                              changeurl,
+                              body: {
+                                "currentPassword": _oldPasswordController.text,
+                                "password": _newPasswordController.text,
+                                "passwordConfirmation":
+                                    _conformPasswordController.text,
+                              },
+                              headers: {"Authorization": "Bearer $token"},
+                            );
+                            // debugPrint("data is $response");
+                            if (response.statusCode == 200) {
+                              await ins.clear();
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return LoginScreen();
+                                  },
+                                ),
+                                (value) {
+                                  return false;
                                 },
-                              ),
-                            );
+                              );
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                CustomSnackBar.success(
+                                  message: "Change Password Successfully",
+                                ),
+                              );
+                            }
+                            if (response.statusCode == 400 ||
+                                response.statusCode == 403) {
+                              final decodedResult = jsonDecode(response.body);
+                              final message = decodedResult['error']['message'];
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                CustomSnackBar.error(message: message),
+                              );
+                            }
+                          } catch (e) {
                             showTopSnackBar(
                               Overlay.of(context),
-                              CustomSnackBar.success(
-                                message: "Change Password Successfully",
-                              ),
-                            );
-                          }
-                          if (response.statusCode == 400) {
-                            final decodedResult = jsonDecode(response.body);
-                            final message = decodedResult['error']['message'];
-                            showTopSnackBar(
-                              Overlay.of(context),
-                              CustomSnackBar.error(message: message),
+                              CustomSnackBar.error(message: e.toString()),
                             );
                           }
                         }

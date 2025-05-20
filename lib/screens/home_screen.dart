@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bca_project/main.dart';
 import 'package:bca_project/models/login.dart';
 import 'package:bca_project/screens/calander_screen.dart';
 import 'package:bca_project/screens/news_screen.dart';
@@ -185,13 +186,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       LanguageTrancelet(
                         title: "English Language",
                         subtitle: "Set app language to English",
-                        ontap: () {},
+                        ontap: () {
+                          localNotifier.value = Locale("en");
+                        },
                       ),
                       Divider(thickness: 1.3, height: 1),
                       LanguageTrancelet(
                         title: "नेपाली भाषा",
                         subtitle: "एप भाषा नेपालीमा सेट गर्नुहोस्",
-                        ontap: () {},
+                        ontap: () {
+                          localNotifier.value = Locale("ne");
+                        },
                       ),
                     ],
                   ),
