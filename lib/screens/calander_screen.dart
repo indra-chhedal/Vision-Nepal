@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:bca_project/screens/date_translation.dart';
+import 'package:bca_project/widgets/drawer_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CalanderScreen extends StatefulWidget {
   const CalanderScreen({super.key});
@@ -90,6 +93,37 @@ class _CalanderScreenState extends State<CalanderScreen> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  height: 50,
+                  child: Text(
+                    "Our Services",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+                DrawerIcons(
+                  icons: Icons.calendar_month,
+                  title: AppLocalizations.of(context)!.dateTranslation,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return DateTranslation();
+                        },
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: 8),
+                DrawerIcons(
+                  icons: Icons.sticky_note_2,
+                  title: AppLocalizations.of(context)!.writeNote,
+                  onTap: () {},
                 ),
               ],
             ),
