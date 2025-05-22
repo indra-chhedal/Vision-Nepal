@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nepali_utils/nepali_utils.dart';
-import 'package:timeago/timeago.dart';
+import 'package:nepali_date_picker/nepali_date_picker.dart';
 
 class DateTranslation extends StatefulWidget {
   const DateTranslation({super.key});
@@ -18,10 +17,7 @@ class _DateTranslationState extends State<DateTranslation> {
   void convertDate() {
     setState(() {
       if (isAdtoBs && selectedAdDate != null) {
-        convertedDate =
-            NepaliDateTime.fromDateTime(
-              selectedBsDate!.toNepaliDateTime(),
-            ).toString();
+        convertedDate = selectedAdDate!.toNepaliDateTime().toString();
       } else if (!isAdtoBs && selectedBsDate != null) {
         convertedDate = selectedBsDate!.toDateTime().toString();
       } else {
@@ -45,7 +41,7 @@ class _DateTranslationState extends State<DateTranslation> {
   }
 
   Future<void> pickBsDate() async {
-    final picked = await showDatePicker(
+    final picked = await showMaterialDatePicker(
       context: context,
       initialDate: NepaliDateTime.now(),
       firstDate: NepaliDateTime(2000),
@@ -53,7 +49,7 @@ class _DateTranslationState extends State<DateTranslation> {
     );
     if (picked != null) {
       setState(() {
-        selectedBsDate = NepaliDateTime.fromDateTime(picked);
+        selectedBsDate = picked;
       });
     }
   }

@@ -131,11 +131,12 @@ class _PasswordchangeScreenState extends State<PasswordchangeScreen> {
                         ),
                       ),
                     ),
-                    // validator: (value) {
-                    //   if (value != _newPasswordController) {
-                    //     return "New Password is Not Match";
-                    //   }
-                    // },
+                    validator: (value) {
+                      if (value?.trim() !=
+                          _newPasswordController.text?.trim()) {//using trim() to compare two passwords from users.
+                        return "New Password is Not Match";
+                      }
+                    },
                   ),
                   SizedBox(height: 30),
                   SizedBox(
