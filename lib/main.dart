@@ -42,3 +42,4 @@ class MainApp extends StatelessWidget {
 //changenotifier/valuelistenablebuilder 
 //nepali utils for date conversion
 //flutter native splash
+//app icon generator is used to generate the logo of app using your figma design of logo and generate all files of logo using zif file

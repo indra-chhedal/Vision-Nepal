@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bca_project/screens/date_translation.dart';
+import 'package:bca_project/screens/note_screen.dart';
 import 'package:bca_project/widgets/drawer_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -61,6 +62,7 @@ class _CalanderScreenState extends State<CalanderScreen> {
                   aspectRatio: 18 / 9,
                   child: Image.network(
                     "https://picsum.photos/200",
+
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -123,7 +125,15 @@ class _CalanderScreenState extends State<CalanderScreen> {
                 DrawerIcons(
                   icons: Icons.sticky_note_2,
                   title: AppLocalizations.of(context)!.writeNote,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return NoteScreen();
+                        },
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

@@ -10,6 +10,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -49,7 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 220),
                 TextFormField(
                   controller: _usernameController,
-                  decoration: InputDecoration(labelText: AppLocalizations.of(context)!.username),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.username,
+                  ),
                   validator: (String? value) {
                     if (value == null) {
                       return "Username is required";

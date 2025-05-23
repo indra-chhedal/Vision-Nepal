@@ -138,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                         final registerUrl = Uri.parse(
                           "http://10.0.2.2:1337/api/auth/local/register",
-                        ); //android immulator ma chai localhost ko place ma 10.0.2.2 rakhna parxa ani balla hamro form ko data api ma janxa
+                        ); // ${ApiConstant.apiBaseUrl} //http://10.0.2.2:1337/ android immulator ma chai localhost ko place ma 10.0.2.2 rakhna parxa ani balla hamro form ko data api ma janxa
                         http.Response responce = await http.post(
                           registerUrl,
                           body: {
