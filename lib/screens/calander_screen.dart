@@ -21,6 +21,12 @@ class _CalanderScreenState extends State<CalanderScreen> {
   late Timer _timer;
   String _currentTime = '';
 
+  final List<String> images = [
+    'images/calander_head.jpeg',
+    'images/sunset.jpeg',
+    'images/sunsine.jpeg',
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -60,10 +66,70 @@ class _CalanderScreenState extends State<CalanderScreen> {
               children: [
                 AspectRatio(
                   aspectRatio: 18 / 9,
-                  child: Image.network(
-                    "https://picsum.photos/200",
-
-                    fit: BoxFit.cover,
+                  child: PageView.builder(
+                    itemCount: images.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(images[index]),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.black.withOpacity(0.4),
+                                    Colors.transparent,
+                                  ],
+                                  begin: Alignment.bottomLeft,
+                                  end: Alignment.topRight,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 16,
+                              left: 16,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'शुभ संध्या',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.cloud_outlined,
+                                        color: Colors.white,
+                                        size: 25,
+                                      ),
+                                      SizedBox(width: 6),
+                                      Text(
+                                        '23° C | Kathmandu',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ),
                 SizedBox(height: 20),

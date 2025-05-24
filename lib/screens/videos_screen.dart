@@ -39,7 +39,10 @@ class _VideosScreenState extends State<VideosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.watchVideo),
+        title: Text(
+          AppLocalizations.of(context)!.watchVideo,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 247, 246, 247),
         foregroundColor: const Color.fromARGB(255, 248, 4, 4),

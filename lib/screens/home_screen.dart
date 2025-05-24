@@ -5,6 +5,7 @@ import 'package:bca_project/models/login.dart';
 import 'package:bca_project/screens/calander_screen.dart';
 import 'package:bca_project/screens/date_translation.dart';
 import 'package:bca_project/screens/news_screen.dart';
+import 'package:bca_project/screens/note_screen.dart';
 import 'package:bca_project/screens/profile_screen.dart';
 import 'package:bca_project/screens/videos_screen.dart';
 import 'package:bca_project/widgets/dark_mode.dart';
@@ -27,6 +28,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   Login? user;
+
+  final Uri youtubeUrl = Uri.parse("https://www.youtube.com/@TradersNepal");
+  final Uri facebookUrl = Uri.parse("https://www.facebook.com/indra.chhedal");
+  final Uri instagramUrl = Uri.parse("https://www.instagram.com/indrachhedal/");
+  final Uri linkedinUrl = Uri.parse(
+    "https://www.linkedin.com/in/indra-chhedal-a72904280/",
+  );
 
   final List<Widget> _screens = [
     CalanderScreen(),
@@ -157,7 +165,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     DrawerIcons(
                       icons: Icons.calendar_month,
                       title: AppLocalizations.of(context)!.nepaliCalendar,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                        );
+                      },
                     ),
                     Divider(height: 1, thickness: 1, color: Colors.grey[300]),
                     DrawerIcons(
@@ -177,7 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     DrawerIcons(
                       icons: Icons.sticky_note_2,
                       title: AppLocalizations.of(context)!.writeNote,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => NoteScreen()),
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -216,26 +232,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 5,
                 children: [
-                  SocialIcons(
-                    icons: Icons.facebook,
-                    color: const Color.fromARGB(255, 48, 152, 237),
-                    onTap: () {},
-                  ),
-                  SocialIcons(
-                    icons: Icons.video_collection_outlined,
-                    color: Colors.red,
-                    onTap: () {},
-                  ),
-                  SocialIcons(
-                    icons: Icons.tiktok,
-                    color: Colors.black,
-                    onTap: () {},
-                  ),
-                  SocialIcons(
-                    icons: Icons.web_stories,
-                    color: Colors.pinkAccent,
-                    onTap: () {},
-                  ),
+                  SocialIcons(image: "images/facebook.svg", url: facebookUrl),
+                  SocialIcons(image: "images/youtube.svg", url: youtubeUrl),
+                  SocialIcons(image: "images/linkedin.svg", url: linkedinUrl),
+                  SocialIcons(image: "images/instagram.svg", url: instagramUrl),
                 ],
               ),
             ],
