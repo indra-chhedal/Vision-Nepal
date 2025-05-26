@@ -1,7 +1,8 @@
 # 📱 Vision Nepal – Mobile News App
 Vision Nepal is a modern, fully responsive mobile news app built to deliver rich, localized, and multilingual news content from Nepal. Whether you want to watch news videos, read articles in your preferred language, or jot down notes as you go—Vision Nepal makes it seamless, smart, and personal.
 
-## 🚀 Features
+![image alt](https://github.com/indra-chhedal/Vision-Nepal/blob/main/project_ss.png)
+## Features
 🌐 Multi-language Support
 Switch between Nepali and English effortlessly for a personalized news experience.
 
@@ -20,7 +21,7 @@ Contact the Vision Nepal team directly by sending message queries through Gmail 
 📱 Fully Responsive Design
 Designed for all mobile screen sizes with a clean and intuitive interface.
 
-## 🛠 Tech Stack
+## Tech Stack
 Frontend: Flutter + Dart
 
 Backend: Strapi (Headless CMS)
