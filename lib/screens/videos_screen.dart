@@ -23,7 +23,7 @@ class _VideosScreenState extends State<VideosScreen> {
   }
 
   void fetchVideoFromApi() async {
-    var url = Uri.parse("http://10.0.2.2:1337/api/videos/?populate=*");
+    var url = Uri.parse("${ApiConstant.apiBaseUrl}api/videos/?populate=*");
     http.Response response = await http.get(url);
     Map<String, dynamic> decodedResult = jsonDecode(response.body);
     List data = decodedResult['data'];

@@ -3,6 +3,7 @@ import 'package:bca_project/screens/add_todo_screen.dart';
 import 'package:bca_project/screens/edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NoteScreen extends StatefulWidget {
   const NoteScreen({super.key});
@@ -16,7 +17,7 @@ class _NoteScreenState extends State<NoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Notes")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.note)),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -33,7 +34,7 @@ class _NoteScreenState extends State<NoteScreen> {
                           children: [
                             SvgPicture.asset('images/empty.svg', width: 200),
                             Text(
-                              "Empty List Items",
+                              AppLocalizations.of(context)!.empty,
                               style: TextStyle(color: Colors.red, fontSize: 30),
                             ),
                           ],

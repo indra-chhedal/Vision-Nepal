@@ -32,7 +32,7 @@ class _NewsScreenState extends State<NewsScreen> {
       return;
     }
 
-    var url = Uri.parse("http://10.0.2.2:1337/api/articles?populate=*");
+    var url = Uri.parse("${ApiConstant.apiBaseUrl}api/articles?populate=*");
     http.Response result = await http.get(
       url,
       headers: {'Authorization': "Bearer $token"},

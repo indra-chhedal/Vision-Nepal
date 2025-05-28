@@ -35,7 +35,8 @@ class MainApp extends StatelessWidget {
   }
 }
 
-//localization and internationalization -> used to photo scan and convert into voiceover
+//localization and internationalization /->//yasma new kura add garda khari "flutter gen-l10n" run garna parxa ani gen file ma add hunxa
+//-> used to photo scan and convert into voiceover
 //api.flutter.dev
 //google_mlkit_text_recoginition  //change the language 
 //mailar used to send mail
@@ -43,3 +44,4 @@ class MainApp extends StatelessWidget {
 //nepali utils for date conversion
 //flutter native splash
 //app icon generator is used to generate the logo of app using your figma design of logo and generate all files of logo using zif file
+//flutter_bloc

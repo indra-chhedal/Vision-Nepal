@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nepali_date_picker/nepali_date_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DateTranslation extends StatefulWidget {
   const DateTranslation({super.key});
@@ -60,7 +61,7 @@ class _DateTranslationState extends State<DateTranslation> {
       appBar: AppBar(
         elevation: 4,
         title: Text(
-          "Nepali Date Traslator",
+          AppLocalizations.of(context)!.dateTrasnlator,
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -91,8 +92,8 @@ class _DateTranslationState extends State<DateTranslation> {
           children: [
             Text(
               isAdtoBs
-                  ? "AD मितिलाई BS मा रूपान्तरण गर्नुहोस्"
-                  : "BS मितिलाई AD मा रूपान्तरण गर्नुहोस्",
+                  ? AppLocalizations.of(context)!.adtobs
+                  : AppLocalizations.of(context)!.bstoad,
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 16),
@@ -100,25 +101,28 @@ class _DateTranslationState extends State<DateTranslation> {
               onTap: isAdtoBs ? pickAdDate : pickBsDate,
               child: InputDecorator(
                 decoration: InputDecoration(
-                  labelText: isAdtoBs ? "AD Date Here" : "BS Date Here",
+                  labelText:
+                      isAdtoBs
+                          ? AppLocalizations.of(context)!.addate
+                          : AppLocalizations.of(context)!.bsdate,
                   border: OutlineInputBorder(),
                 ),
                 child: Text(
                   isAdtoBs
                       ? (selectedAdDate != null
                           ? selectedAdDate.toString().split(' ')[0]
-                          : 'मिति चयन गर्नुहोस्')
+                          : AppLocalizations.of(context)!.selectdate)
                       : (selectedBsDate != null
                           ? NepaliDateFormat.yMMMMd().format(selectedBsDate!)
-                          : 'मिति चयन गर्नुहोस्'),
+                          : AppLocalizations.of(context)!.selectdate),
                 ),
               ),
             ),
             SizedBox(height: 24),
-            ElevatedButton(onPressed: convertDate, child: Text("Translation")),
+            ElevatedButton(onPressed: convertDate, child: Text(AppLocalizations.of(context)!.translation)),
             SizedBox(height: 24),
             Text(
-              "Translated Date Here",
+              AppLocalizations.of(context)!.translateddate,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),

@@ -166,7 +166,7 @@ class _CalanderScreenState extends State<CalanderScreen> {
                 SizedBox(
                   height: 50,
                   child: Text(
-                    "Our Services",
+                    AppLocalizations.of(context)!.service,
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,

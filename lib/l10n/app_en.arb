@@ -4,7 +4,7 @@
   "@login": {
     "description": "login is successful"
   },
-  "visionNepal": "Visioan Nepal",
+  "visionNepal": "Vision Nepal",
   
   "watchVideo": "Watch Video",
 
@@ -44,5 +44,42 @@
 
   "email": "Email",
 
-  "haveaccount": "Do you have account ?"
+  "haveaccount": "Do you have account ?",
+
+  "dateTrasnlator": "Nepali Date Traslator",
+
+  "adtobs": "Convert AD date to BS",
+
+  "bstoad": "Convert BS date to AD",
+
+  "addate": "AD Date Here",
+
+  "bsdate": "BS Date Here",
+
+  "selectdate": "Select a date",
+
+  "translateddate": "Translated Date Here",
+
+  "translation": "Translation",
+
+  "note": "Notes",
+
+  "listcount": "Total Number of list is",
+
+  "empty": "Empty List Items",
+
+  "addtodo": "Add a Item",
+
+  "itemtitle": "Enter Title",
+
+  "description": "Description",
+
+  "cancel": "Cancel",
+
+  "itembtn": "Add Item",
+
+  "service": "Our Services"
+
+
 }
+

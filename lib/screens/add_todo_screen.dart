@@ -1,5 +1,6 @@
 import 'package:bca_project/models/todo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodoAdd extends StatefulWidget {
   const TodoAdd({super.key});
@@ -50,7 +51,7 @@ class _TodoAddState extends State<TodoAdd> {
                 child: Column(
                   spacing: 10,
                   children: [
-                    Text("Add a Item", style: TextStyle(fontSize: 24)),
+                    Text(AppLocalizations.of(context)!.addtodo, style: TextStyle(fontSize: 24)),
 
                     Column(
                       children: [
@@ -59,7 +60,7 @@ class _TodoAddState extends State<TodoAdd> {
                           decoration: InputDecoration(
                             fillColor: const Color.fromARGB(255, 255, 254, 254),
                             // hintText: "Enter title",
-                            labelText: "Enter Title",
+                            labelText: AppLocalizations.of(context)!.itemtitle,
                             filled: true,
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
@@ -82,7 +83,7 @@ class _TodoAddState extends State<TodoAdd> {
                             fillColor: const Color.fromARGB(255, 254, 254, 254),
 
                             // hintText: "Enter Description",
-                            labelText: "Description",
+                            labelText: AppLocalizations.of(context)!.description,
                             alignLabelWithHint: true,
 
                             filled: true,
@@ -93,7 +94,7 @@ class _TodoAddState extends State<TodoAdd> {
                           ),
                           validator: (String? value) {
                             if (value == null || value.isEmpty) {
-                              return "Title is required";
+                              return "Description is required";
                             }
                             return null;
                           },
@@ -126,7 +127,7 @@ class _TodoAddState extends State<TodoAdd> {
                               ),
                             ),
                             child: Text(
-                              "Add Item",
+                              AppLocalizations.of(context)!.itembtn,
                               style: TextStyle(fontSize: 20, color: Colors.red),
                             ),
                           ),
@@ -141,7 +142,7 @@ class _TodoAddState extends State<TodoAdd> {
                               ),
                             ),
                             child: Text(
-                              "Cancel",
+                              AppLocalizations.of(context)!.cancel,
                               style: TextStyle(fontSize: 20, color: Colors.red),
                             ),
                           ),
