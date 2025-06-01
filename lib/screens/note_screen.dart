@@ -1,5 +1,5 @@
 import 'package:bca_project/models/todo.dart';
-import 'package:bca_project/screens/add_todo_screen.dart';
+import 'package:bca_project/screens/addnote_screen.dart';
 import 'package:bca_project/screens/edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -114,7 +114,7 @@ class _NoteScreenState extends State<NoteScreen> {
         onPressed: () async {
           Todo? todo = await Navigator.of(
             context,
-          ).push(MaterialPageRoute(builder: (context) => TodoAdd()));
+          ).push(MaterialPageRoute(builder: (context) => AddnoteScreen()));
           if (todo != null) {
             setState(() {
               todos.add(todo);

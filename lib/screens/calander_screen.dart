@@ -18,7 +18,7 @@ class CalanderScreen extends StatefulWidget {
 class _CalanderScreenState extends State<CalanderScreen> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  late Timer _timer;
+  late Timer _timer;//timer use garya vayara current time display hunxa ani auto referesh hunxa time
   String _currentTime = '';
 
   final List<String> images = [
