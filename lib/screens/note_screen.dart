@@ -23,8 +23,6 @@ class _NoteScreenState extends State<NoteScreen> {
         child: Column(
           spacing: 10,
           children: [
-            Text("Total Number of list is (${todos.length})"),
-            SizedBox(height: 10),
             Expanded(
               child:
                   todos.isEmpty
@@ -45,63 +43,132 @@ class _NoteScreenState extends State<NoteScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           Todo todo = todos[index];
 
-                          return ListTile(
-                            onLongPress: () {
-                              //list item ma long press garda bottomsheet khulna banako ho
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 30),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        ListTile(
-                                          leading: Icon(Icons.delete),
-                                          title: Text("Delete"),
-                                          onTap: () {
-                                            //show dialog for dialog box for alert dialog
-                                            Navigator.of(context).pop();
-                                            setState(() {
-                                              todos.removeAt(index);
-                                            });
-                                          },
+                          return Card(
+                            elevation: 1,
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            child: Dismissible(
+                              key: Key(todos.toString()),
+                              direction: DismissDirection.endToStart,
+                              background: Container(
+                                alignment: Alignment.centerRight,
+                                padding: EdgeInsets.only(right: 20),
+                                color: Colors.red,
+                                child: Icon(Icons.delete, color: Colors.white),
+                              ),
+                              confirmDismiss: (direction) {
+                                return showDialog(
+                                  context: context,
+                                  builder:
+                                      (context) => AlertDialog(
+                                        title: Text("Delete Note?"),
+                                        content: Text(
+                                          "Are you Sure you want to delete this note?",
                                         ),
-                                        ListTile(
-                                          leading: Icon(Icons.edit),
-                                          title: Text("Edit"),
-                                          onTap: () async {
-                                            Navigator.of(context).pop();
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.of(
+                                                  context,
+                                                ).pop(false),
+                                            child: Text("Cancel"),
+                                          ),
+                                          TextButton(
+                                            onPressed:
+                                                () => Navigator.of(
+                                                  context,
+                                                ).pop(true),
+                                            child: Text("Delete"),
+                                          ),
+                                        ],
+                                      ),
+                                );
+                              },
+                              onDismissed: (direction) {
+                                setState(() {
+                                  todos.removeAt(index);
+                                });
+                              },
+                              child: ListTile(
+                                // onLongPress: () {
+                                //   //list item ma long press garda bottomsheet khulna banako ho
+                                //   showModalBottomSheet(
+                                //     context: context,
+                                //     builder: (context) {
+                                //       return Padding(
+                                //         padding: EdgeInsets.symmetric(
+                                //           vertical: 30,
+                                //         ),
+                                //         child: Column(
+                                //           mainAxisSize: MainAxisSize.min,
+                                //           children: [
+                                //             ListTile(
+                                //               leading: Icon(Icons.delete),
+                                //               title: Text("Delete"),
+                                //               onTap: () {
+                                //                 //show dialog for dialog box for alert dialog
+                                //                 Navigator.of(context).pop();
+                                //                 setState(() {
+                                //                   todos.removeAt(index);
+                                //                 });
+                                //               },
+                                //             ),
+                                //             ListTile(
+                                //               leading: Icon(Icons.edit),
+                                //               title: Text("Edit"),
+                                //               onTap: () async {
+                                //                 Navigator.of(context).pop();
 
-                                            await Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder:
-                                                    (context) => EditScreen(
-                                                      todoItem: todo,
-                                                    ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ],
+                                //                 await Navigator.of(context).push(
+                                //                   MaterialPageRoute(
+                                //                     builder:
+                                //                         (context) => EditScreen(
+                                //                           todoItem: todo,
+                                //                         ),
+                                //                   ),
+                                //                 );
+                                //               },
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       );
+                                //     },
+                                //   );
+                                // },
+                                onTap: () async {
+                                  await Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder:
+                                          (context) =>
+                                              EditScreen(todoItem: todo),
                                     ),
                                   );
                                 },
-                              );
-                            },
-                            title: Text(todo.title),
-                            subtitle: Text(todo.description),
-                            trailing: Checkbox(
-                              value: todo.isCompleted,
-                              onChanged: (value) {
-                                //yasma chai todos ko index lai replace garxa todo la ani complete xa vani uncomplete garxa tougle garxa
-                                setState(() {
-                                  //todo lai rerender garna parxa setstate garyara
-                                  todos[index] = todo.copyWith(
-                                    isCompleted: !todo.isCompleted,
-                                  );
-                                });
-                              },
+
+                                title: Text(
+                                  todo.title,
+                                  style: TextStyle(
+                                    height: 2,
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color.fromARGB(
+                                      221,
+                                      39,
+                                      38,
+                                      38,
+                                    ),
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  todo.description,
+                                  style: TextStyle(
+                                    height: 2,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
                             ),
                           );
                         },

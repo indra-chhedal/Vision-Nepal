@@ -1,7 +1,6 @@
 import 'package:bca_project/models/todo.dart';
 import 'package:flutter/material.dart';
 
-
 class EditScreen extends StatefulWidget {
   const EditScreen({super.key, required this.todoItem});
 
@@ -12,152 +11,91 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late TextEditingController _titleController;
+  late TextEditingController _descriptionController;
 
-  late TextEditingController titleControler;
-  late TextEditingController descriptionControler;
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    //init state ma chai previous value ni same rahanxa pahila ko filed ma that means pahila ko value initialized vayara basyako hunxa
-    titleControler = TextEditingController(text: widget.todoItem.title);
-    descriptionControler = TextEditingController(
+    _titleController = TextEditingController(text: widget.todoItem.title);
+    _descriptionController = TextEditingController(
       text: widget.todoItem.description,
     );
     super.initState();
   }
 
+  void _saveNote() {
+    bool isValid = _globalKey.currentState!.validate();
+
+    if (isValid) {
+      Todo todo = Todo(
+        title: _titleController.text.trim(),
+        description: _descriptionController.text.trim(),
+      );
+      Navigator.of(context).pop(todo);
+      
+    }
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      appBar: AppBar(
+        title: Text("Notes"),
+        actions: [
+          IconButton(onPressed: _saveNote, icon: Icon(Icons.check, size: 35)),
+        ],
+      ),
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
-            margin: EdgeInsets.only(top: 50),
-            height: 400,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 244, 242, 242),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color.fromARGB(115, 125, 124, 124),
-                  spreadRadius: 3,
-                  blurRadius: 5,
+        child: Form(
+          key: _globalKey,
+          child: Column(
+            spacing: 13,
+            children: [
+              TextFormField(
+                controller: _titleController,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Title",
+                  hintStyle: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
+                  ),
                 ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  spacing: 10,
-                  children: [
-                    Text("Edit Item", style: TextStyle(fontSize: 24)),
-
-                    Column(
-                      children: [
-                        TextFormField(
-                          controller: titleControler,
-                          decoration: InputDecoration(
-                            fillColor: const Color.fromARGB(255, 255, 254, 254),
-                            // hintText: "Enter title",
-                            labelText: "Enter Title",
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return "Title is required";
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 20),
-
-                        TextFormField(
-                          maxLines: 3,
-                          controller: descriptionControler,
-                          decoration: InputDecoration(
-                            fillColor: const Color.fromARGB(255, 254, 254, 254),
-                            // hintText: "Enter Description",
-                            labelText: "Description",
-                            alignLabelWithHint: true,
-
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return "Title is required";
-                            }
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        spacing: 20,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              bool isValid = _formKey.currentState!.validate();
-
-                              if (isValid) {
-                                Todo todo = Todo(
-                                  title: titleControler.text,
-                                  description: descriptionControler.text,
-                                  isCompleted: false,
-                                );
-                                
-                                Navigator.of(context).pop(todo);
-                              }
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll(
-                                const Color.fromARGB(255, 211, 210, 209),
-                              ),
-                            ),
-                            child: Text(
-                              "Edit Item",
-                              style: TextStyle(fontSize: 20, color: Colors.red),
-                            ),
-                          ),
-
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll(
-                                const Color.fromARGB(255, 211, 210, 209),
-                              ),
-                            ),
-                            child: Text(
-                              "Cancel",
-                              style: TextStyle(fontSize: 20, color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Title is Null";
+                  } else {
+                    return null;
+                  }
+                },
               ),
-            ),
+              TextFormField(
+                controller: _descriptionController,
+                decoration: InputDecoration(
+                  hintText: "Note something down",
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: const Color.fromARGB(255, 180, 180, 180),
+                  ),
+                ),
+                style: TextStyle(fontSize: 18),
+                maxLines: 40,
+              ),
+            ],
           ),
         ),
       ),
