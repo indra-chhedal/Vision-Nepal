@@ -4,6 +4,7 @@ import 'package:bca_project/screens/edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:uuid/uuid.dart';
 
 class NoteScreen extends StatefulWidget {
   const NoteScreen({super.key});
@@ -13,7 +14,9 @@ class NoteScreen extends StatefulWidget {
 }
 
 class _NoteScreenState extends State<NoteScreen> {
+  
   List<Todo> todos = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,6 +148,7 @@ class _NoteScreenState extends State<NoteScreen> {
                                 },
 
                                 title: Text(
+                                  
                                   todo.title,
                                   style: TextStyle(
                                     height: 2,

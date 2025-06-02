@@ -1,5 +1,6 @@
 import 'package:bca_project/models/todo.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class EditScreen extends StatefulWidget {
   const EditScreen({super.key, required this.todoItem});
@@ -11,6 +12,7 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
+  final uuid = Uuid();
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
 
@@ -30,11 +32,11 @@ class _EditScreenState extends State<EditScreen> {
 
     if (isValid) {
       Todo todo = Todo(
+        id: widget.todoItem.id,
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
       );
       Navigator.of(context).pop(todo);
-      
     }
   }
 

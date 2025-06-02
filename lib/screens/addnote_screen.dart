@@ -1,5 +1,6 @@
 import 'package:bca_project/models/todo.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class AddnoteScreen extends StatefulWidget {
   const AddnoteScreen({super.key});
@@ -32,6 +33,7 @@ class _AddnoteScreenState extends State<AddnoteScreen> {
 
     if (isValid) {
       Todo todo = Todo(
+        id: Uuid().v4(),
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
       );
