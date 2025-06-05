@@ -145,6 +145,7 @@ class _NoteScreenState extends State<NoteScreen> {
                                               EditScreen(todoItem: todo),
                                     ),
                                   );
+                                  
                                 },
 
                                 title: Text(

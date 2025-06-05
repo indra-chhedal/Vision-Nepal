@@ -12,7 +12,7 @@ class Todo {
   });
 
   //create a copy with method data check uncheck garna lai
-  Todo copyWith({String? title, String? description, bool? isCompleted}) {
+  Todo copyWith({String? title, String? description}) {
     return Todo(
       id: id,
       title: title ?? this.title,
